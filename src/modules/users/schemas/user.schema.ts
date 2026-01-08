@@ -1,4 +1,4 @@
-import { Prop, Schema } from '@nestjs/mongoose'
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
 interface MakeProps {
@@ -18,10 +18,8 @@ export class User extends Document {
     if (!params.firebaseUid) throw Error('Firebase user id não informado.')
     if (!params.email) throw Error('Email não informado.')
 
-    const user = new User()
-    user.firebaseUid = params.firebaseUid
-    user.email = params.email
-
-    return user
+    return params as User
   }
 }
+
+export const UserSchema = SchemaFactory.createForClass(User)

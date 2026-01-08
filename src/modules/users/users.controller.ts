@@ -2,6 +2,7 @@ import { Body, Controller, HttpStatus, Inject, Post, Res } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dtos/create-user.dto'
+import { Public } from 'src/infra/decorators/auth/public.decorator'
 
 @Controller('users')
 @ApiTags('users')
@@ -10,6 +11,7 @@ export class UsersController {
   private usersService: UsersService
 
   @Post()
+  @Public()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({
     status: 201,
